@@ -18,8 +18,6 @@ class ind_model(base_model):
         self.maxindex = maxindex
         self.num_ver = self.allx.shape[1]
         self.num_x = self.allx.shape[0]
-        # self.num_x = maxindex
-        print(allx.shape)
         self.y_shape=y.shape[1]
         
     def build(self):
@@ -58,7 +56,7 @@ class ind_model(base_model):
             optimizer.zero_grad()
             g_loss.backward()
             optimizer.step()
-            print ('iter label', i, g_loss)
+            # print ('iter label', i, g_loss)
 
 
         ### gen_graph
@@ -76,8 +74,7 @@ class ind_model(base_model):
             optimizer.zero_grad()
             g_loss.backward()
             optimizer.step()
-            
-            print ('iter graph', i, g_loss)
+            # print ('iter graph', i, g_loss)
 
 
     def step_train(self, max_iter, iter_graph, iter_inst, iter_label):
@@ -95,7 +92,6 @@ class ind_model(base_model):
         optimizer_x=torch.optim.SGD(self.model_l_x.parameters(), lr=self.learning_rate)
         
         for _ in range(max_iter):
-
             ### gen_graph
             for _ in range(self.comp_iter(iter_graph)):
                 gx, gy, gz = next(self.graph_generator)
@@ -104,6 +100,7 @@ class ind_model(base_model):
                     l_gy, l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                     gz=torch.tensor(gz)
                     g_loss = - torch.log( g_loss_criterion( torch.sum(l_gx * l_gy, dim = 1) * gz )  ) .sum()
+                    print('iter graph', g_loss)
                 else:
                     l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                     gy=torch.LongTensor(gy)
@@ -131,7 +128,7 @@ class ind_model(base_model):
                 optimizer_x.zero_grad()
                 loss.backward()
                 optimizer_x.step()
-                print ('iter graph', loss)
+                print ('iter inst', loss)
 
             ### gen_label_graph
             for _ in range(self.comp_iter(iter_label)):
@@ -140,13 +137,11 @@ class ind_model(base_model):
                     l_gy, l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                     gz=torch.tensor(gz)
                     g_loss = - torch.log( g_loss_criterion( torch.sum(l_gx * l_gy, dim = 1) * gz )  ) .sum()
-                    print ('iter graph', g_loss)
-
+                    print ('iter label graph', g_loss)
                 else:
                     l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                     gy=torch.LongTensor(gy)
                     g_loss = criterion(l_gx, gy)
-
                 optimizer_gx.zero_grad()
                 g_loss.backward()
                 optimizer_gx.step()
@@ -250,14 +245,6 @@ class ind_model(base_model):
         types = 2
         labels, label2inst, not_label = [], dd(list), dd(list)
 
-        # for i in range(self.x.shape[0]):
-        #     for j in range(types):
-        #         if self.y == j:
-        #             labels.append(j)
-        #             label2inst[j].append(i)
-        #         else:
-        #             not_label[j].append(i)
-
         for i in range(self.x.shape[0]):
             flag = False
             for j in range(self.y.shape[1]):
@@ -315,7 +302,7 @@ class NeuralNetUnsupervised(nn.Module):
         if self.neg_samp > 0:
             print("num_x: ",self.num_x)
             print("maxindex: ",self.maxindex)
-            self.embedding_l_gy = nn.Embedding(num_embeddings = int(self.maxindex), embedding_dim = self.embedding_size)
+            self.embedding_l_gy = nn.Embedding(num_embeddings = int(self.maxindex+1), embedding_dim = self.embedding_size)
         else :
             self.fc_gx2 = nn.Linear(self.embedding_size, self.num_x)
             self.nonlinearity_gx2 = nn.Softmax()
