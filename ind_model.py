@@ -17,8 +17,8 @@ class ind_model(base_model):
         self.x, self.y, self.allx, self.graph, self.featureDict = x, y, allx, graph, features
         self.maxindex = maxindex
         self.num_ver = self.allx.shape[1]
-        #self.num_x = self.allx.shape[0]
-        self.num_x = maxindex
+        self.num_x = self.allx.shape[0]
+        # self.num_x = maxindex
         print(allx.shape)
         self.y_shape=y.shape[1]
         
@@ -183,12 +183,21 @@ class ind_model(base_model):
                 # node1's feature, node2's feature, label
                 # self.allx is a np.array, shape: [n, # of feature]
                 # yield self.allx[node1], self.allx[node2], label
-                node1_feature = []
-                node2_feature = []
+                node1_features = []
+                node2_features = []
                 for idx in range(j-i):
-                    node1_feature.append(self.featureDict[node1[idx]])
-                    node2_feature.append(self.featureDict[node2[idx]])
-                yield np.array(node1_feature), np.array(node2_feature), label
+                    if self.featureDict[node1[idx]] == []:
+                        self.featureDict[node1[idx]] = np.random.rand(1,300)
+                    node1_feature = self.featureDict[node1[idx]]
+                    node1_features.append(node1_feature)
+                    if self.featureDict[node2[idx]] == []:
+                        self.featureDict[node2[idx]] = np.random.rand(1,300)
+                    node2_feature = self.featureDict[node2[idx]]
+                    node2_features.append(node2_feature)
+
+                node1_features = np.array(node1_features).reshape((-1, 300))
+                node2_features = np.array(node2_features).reshape((-1, 300))
+                yield node1_features, node2_features, label
                 i = j
 
 
@@ -369,7 +378,7 @@ class NeuralNetSupervised(nn.Module):
 
     def forward(self, x1, x2):
             # node1 two flow direction
-            x1=torch.tensor(np.array(x1))
+            x1=torch.tensor(x1).float()
             l_x1_1 = self.fc_node1_x1(x1)
             l_x1_1 = self.nonlinearity_node1_x1(l_x1_1)
             l_x1_2 = torch.mm(x1, self.hiddenLayerWeight.t())
@@ -378,7 +387,7 @@ class NeuralNetSupervised(nn.Module):
             l_x1_2 = self.nonlinearity_node1_x2_2(l_x1_2)
 
             # node2 two flow direction
-            x2 = torch.tensor(np.array(x2))
+            x2 = torch.tensor(x2).float()
             l_x2_1 = self.fc_node2_x1(x2)
             l_x2_1 = self.nonlinearity_node2_x1(l_x2_1)
             l_x2_2 = torch.mm(x2, self.hiddenLayerWeight.t())

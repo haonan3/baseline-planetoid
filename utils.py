@@ -94,6 +94,10 @@ def makeTestFeature(tx, features):
     TestFeature1 = []
     TestFeature2 = []
     for i in range(tx.shape[0]):
+        if features[tx[i,0]] == []:
+            features[tx[i, 0]] = np.random.rand(1,300)
         TestFeature1.append(features[tx[i,0]])
+        if features[tx[i,1]] == []:
+            features[tx[i, 1]] = np.random.rand(1,300)
         TestFeature2.append(features[tx[i,1]])
-    return np.array(TestFeature1), np.array(TestFeature2)
+    return np.array(TestFeature1).reshape((-1,300)), np.array(TestFeature2).reshape((-1,300))
