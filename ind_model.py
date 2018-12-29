@@ -182,7 +182,13 @@ class ind_model(base_model):
 
                 # node1's feature, node2's feature, label
                 # self.allx is a np.array, shape: [n, # of feature]
-                yield self.allx[node1], self.allx[node2], label
+                # yield self.allx[node1], self.allx[node2], label
+                node1_feature = []
+                node2_feature = []
+                for idx in range(j-i):
+                    node1_feature.append(self.featureDict[node1[idx]])
+                    node2_feature.append(self.featureDict[node2[idx]])
+                yield np.array(node1_feature), np.array(node2_feature), label
                 i = j
 
 
