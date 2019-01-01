@@ -8,6 +8,7 @@ import numpy as np
 from collections import defaultdict as dd
 import random
 import gensim
+from tqdm import tqdm
 
 
 
@@ -278,10 +279,36 @@ class ind_model(base_model):
             yield np.array(features).reshape((-1,300)), g[:, 1], gy
 
 
-    def save_embedding(self, id, path):
-        learned_embed = gensim.models.keyedvectors.Word2VecKeyedVectors(self.embedding_size)
-        learned_embed.add(id, self.model_l_gx.embedding_l_gy.weight.data.cpu().numpy())
-        learned_embed.save_word2vec_format(fname=path, binary=False)
+    # def save_embedding(self, id, path):
+    #     learned_embed = gensim.models.keyedvectors.Word2VecKeyedVectors(self.embedding_size)
+    #     learned_embed.add(id, self.model_l_gx.embedding_l_gy.weight.data.cpu().numpy())
+    #     learned_embed.save_word2vec_format(fname=path, binary=False)
+
+
+    def extract_embedding(self, embeddingpath):
+        # open the output file
+        # extract label and feature
+        # input feature and concat label and embedding
+        # write the result
+
+
+        nlines = len(self.featureDict)
+
+        print("make embedding...")
+        with torch.no_grad():
+            with open(embeddingpath, "w") as embeddingfile:
+                embeddingfile.write(str(nlines) + " " + str(100) + "\n")
+                for key,value in tqdm(self.featureDict.items(), total=nlines):
+                    # line = l.replace(",", " ")
+                    # embeddingfile.write(line)
+
+                    embedding = self.model_l_x.embed(value).numpy().reshape(-1,).tolist()
+                    one_line = " ".join(map(str, embedding))
+                    embeddingfile.write(str(key) + " ")
+                    embeddingfile.write(one_line)
+                    embeddingfile.write("\n")
+
+
 
 
 
@@ -397,3 +424,9 @@ class NeuralNetSupervised(nn.Module):
                 return l_x1_1, l_x1_2, l_x2_1, l_x2_2, l_x # hid_sym1, emd_sym1, hid_sym2, emd_sym2, py_sym
             else:
                 return l_x
+
+    def embed(self, node_feature):
+        node_feature = torch.tensor(node_feature).float()
+        l_x1_2 = torch.mm(node_feature, self.hiddenLayerWeight.t())
+        l_x1_2 = self.nonlinearity_node1_x2_1(l_x1_2)
+        return l_x1_2

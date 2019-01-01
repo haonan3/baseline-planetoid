@@ -20,8 +20,8 @@ parser.add_argument('--model_file', help = 'filename for saving models', type = 
 parser.add_argument('--use_feature', help = 'whether use input features', type = bool, default = True)
 parser.add_argument('--update_emb', help = 'whether update embedding when optimizing supervised loss', type = bool, default = True)
 parser.add_argument('--layer_loss', help = 'whether incur loss on hidden layers', type = bool, default = True)
-parser.add_argument('--graph_path', help = 'the path of graph file', type = str, default='../author_graph_dataset/author-1900-2020-link-all_copy.txt')
-#parser.add_argument('--graph_path', help = 'the path of graph file', type = str, default='../author_graph_dataset/link-sub_copy.txt')
+#parser.add_argument('--graph_path', help = 'the path of graph file', type = str, default='../author_graph_dataset/author-1900-2020-link-all_copy.txt')
+parser.add_argument('--graph_path', help = 'the path of graph file', type = str, default='../author_graph_dataset/link-sub_copy.txt')
 parser.add_argument('--rel_train_path', help='the path of training relation file', type = str, default='../author_graph_dataset/rel-train.txt')
 parser.add_argument('--rel_test_path', help='the path of testing relation file', type = str, default='../author_graph_dataset/rel-test.txt')
 parser.add_argument('--feature_path', help='the path of feature file', type = str, default='../author_graph_dataset/first_20_node_feature.csv')
@@ -50,27 +50,23 @@ def main():
     m = model(args)                                                 # initialize the model
     m.add_data(x, y, allx, graph, features, maxindex)                                   # add data
     m.build()                                                       # build the model
-    m.init_train(init_iter_label = 10000, init_iter_graph = 400)    # pre-training
-    #m.init_train(init_iter_label=1, init_iter_graph=1)  # pre-training
+    #m.init_train(init_iter_label = 10000, init_iter_graph = 400)    # pre-training
+    m.init_train(init_iter_label=1, init_iter_graph=1)  # pre-training
     iter_cnt, max_accu = 0, 0
-    cu_accu = 0
-    while (time.time() - start_time) < 89500:
-    #while (time.time() - start_time) < 100:
+    #while (time.time() - start_time) < 89500:
+    while (time.time() - start_time) < 30:
         m.step_train(max_iter = 10, iter_graph = 0.1, iter_inst = 1, iter_label = 0) # perform a training step
         tpy = m.predict(tx1, tx2)                                                         # predict the dev set
 
         accu = comp_accu(tpy, ty)                                                   # compute the accuracy on the dev set
-        cu_accu += accu
-        #print (iter_cnt, "{0:.3f}".format(cu_accu/(1+iter_cnt) ) , max_accu)
-
         print (iter_cnt, accu, max_accu)
         iter_cnt += 1
         if accu > max_accu:
             #m.store_params()                                                        # store the model if better result is obtained
             max_accu = max(max_accu, accu)
 
-    id_list = list(range(maxindex+1))
-    m.save_embedding(id=id_list, path=args.embedding_path)
+
+    m.extract_embedding(embeddingpath=args.embedding_path)
     print("--- %s seconds ---" % (time.time() - start_time))
 
 if __name__ == "__main__":

@@ -41,7 +41,6 @@ def makeFeatureDict(featurepath):
         for l in tqdm(featurefile, total=nlines):
             line = [float(i) for i in l.replace("\n", "").replace(","," ").split(" ")]
             node, feature = line[0], line[1:]
-            #features[int(node)] = feature
             features[int(node)] = np.array(feature).reshape(1,300)
     return features
 
@@ -62,26 +61,11 @@ def readRel(relpath):
             label2y = np.zeros((1, 2))
             label2y[0,label] = 1
             y.append(label2y)
-    # x, y
+
     return np.array(edge), np.array(y).reshape((-1,2))
 
 
 def makeFeatureMatrix(features, graph):
-    # feature_matrix = []
-    # for key in graph:
-    #     if features[key] == []:
-    #         features[key] = np.random.rand(1,300)
-    #     feature_matrix.append(features[key][0])
-    # return np.array(feature_matrix)
-
-    # feature_matrix =  np.random.rand(1,300)
-    # for key in graph:
-    #     if features[key] == []:
-    #         features[key] = np.random.rand(1,300).tolist()
-    #     #feature_matrix.append(np.array(features[key]).reshape(1,300), axis=0)
-    #     np.append(feature_matrix, np.array(features[key]).reshape(1,300), axis=0)
-    # return feature_matrix[1:, :]
-
     feature_matrix = []
     for key in graph:
         if features[key] == []:
