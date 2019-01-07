@@ -19,6 +19,7 @@ def makeGraphDict(graphpath):
         for l in tqdm(graphfile, total=nlines):
             line = [int(i) for i in l.replace("\n", "").split(",")]
             node1, node2 = line[0], line[1]
+            # undirected graph
             graph[node1].append(node2)
             graph[node2].append(node1)
             if node1 > maxindex:
@@ -31,11 +32,9 @@ def makeGraphDict(graphpath):
 def makeFeatureDict(featurepath):
     nlines = 0
     features = collections.defaultdict(list)
-
     with open(featurepath, "r") as featurefile:
         for l in featurefile:
             nlines += 1
-
     print("Reading features file...")
     with open(featurepath, "r") as featurefile:
         for l in tqdm(featurefile, total=nlines):
@@ -69,6 +68,7 @@ def makeFeatureMatrix(features, graph):
     feature_matrix = []
     for key in graph:
         if features[key] == []:
+            print("there are node not in feature file")
             features[key] = np.random.rand(1,300)
         feature_matrix.append(features[key])
     return np.array(feature_matrix).reshape(-1,300)
@@ -79,9 +79,11 @@ def makeTestFeature(tx, features):
     TestFeature2 = []
     for i in range(tx.shape[0]):
         if features[tx[i,0]] == []:
+            print("there are test node not in feature file")
             features[tx[i, 0]] = np.random.rand(1,300)
         TestFeature1.append(features[tx[i,0]])
         if features[tx[i,1]] == []:
+            print("there are test node not in feature file")
             features[tx[i, 1]] = np.random.rand(1,300)
         TestFeature2.append(features[tx[i,1]])
     return np.array(TestFeature1).reshape((-1,300)), np.array(TestFeature2).reshape((-1,300))

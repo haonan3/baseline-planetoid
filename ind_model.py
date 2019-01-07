@@ -19,7 +19,7 @@ class ind_model(base_model):
         self.maxindex = maxindex
         self.num_ver = self.allx.shape[1]
         self.num_x = self.allx.shape[0]
-        self.y_shape=y.shape[1]
+        self.y_shape = y.shape[1]
         
     def build(self):
         pass
@@ -31,8 +31,8 @@ class ind_model(base_model):
         """
         # gx, gy, gz = next(self.label_generator)
         # x, y = next(self.inst_generator)
-        self.model_l_gx = NeuralNetUnsupervised( self.num_ver,  self.num_x, self.maxindex, self.embedding_size , self.neg_samp )
-        self.model_l_x = NeuralNetSupervised( self.use_feature, self.embedding_size, self.num_ver,self.y_shape,
+        self.model_l_gx = NeuralNetUnsupervised(self.num_ver,  self.num_x, self.maxindex, self.embedding_size , self.neg_samp)
+        self.model_l_x = NeuralNetSupervised(self.use_feature, self.embedding_size, self.num_ver, self.y_shape,
                                                                 self.layer_loss, self.model_l_gx.get_hiddenLayer())
         
         criterion = nn.CrossEntropyLoss()
@@ -47,9 +47,7 @@ class ind_model(base_model):
                 l_gy, l_gx = self.model_l_gx(torch.tensor(gx), torch.tensor(gy))
                 gz=torch.tensor(gz)
                 g_loss = - torch.log( g_loss_criterion( torch.sum(l_gx * l_gy, dim = 1) * gz )  ) .sum()
-
             else:
-
                 l_gx = self.model_l_gx(torch.tensor(np.array(gx).float()), torch.tensor(gy))
                 gy=torch.LongTensor(gy)
                 g_loss = criterion(l_gx, gy)
@@ -174,7 +172,7 @@ class ind_model(base_model):
                 # self.y is a np.array, shape:[n,]
                 node1 = self.x[ind[i:j],0]
                 node2 = self.x[ind[i:j],1]
-                label = self.y[ind[i: j]]
+                label = self.y[ind[i:j]]
 
                 # node1's feature, node2's feature, label
                 # self.allx is a np.array, shape: [n, # of feature]
@@ -232,7 +230,7 @@ class ind_model(base_model):
                                 gy.append(- 1.0)
 
                 g = np.array(g, dtype = np.int32)
-                yield self.allx[g[:, 0]], g[:, 1], gy
+                yield self.allx[g[:, 0]], self.allx[g[:, 1]], gy
                 i = j
 
 
@@ -272,17 +270,16 @@ class ind_model(base_model):
                     gy.append(-1.0)
 
             g = np.array(g, dtype = np.int32)
-            features = []
+            features1 = []
+            features2 = []
             for i in g[:, 0]:
                 feature = self.featureDict[i]
-                features.append(feature)
-            yield np.array(features).reshape((-1,300)), g[:, 1], gy
+                features1.append(feature)
+            for i in g[:, 1]:
+                feature = self.featureDict[i]
+                features2.append(feature)
+            yield np.array(features1).reshape((-1,300)), np.array(features2).reshape((-1,300)), gy
 
-
-    # def save_embedding(self, id, path):
-    #     learned_embed = gensim.models.keyedvectors.Word2VecKeyedVectors(self.embedding_size)
-    #     learned_embed.add(id, self.model_l_gx.embedding_l_gy.weight.data.cpu().numpy())
-    #     learned_embed.save_word2vec_format(fname=path, binary=False)
 
 
     def extract_embedding(self, embeddingpath):
@@ -290,19 +287,17 @@ class ind_model(base_model):
         # extract label and feature
         # input feature and concat label and embedding
         # write the result
-
-
-        nlines = len(self.featureDict)
-
         print("make embedding...")
+        nlines = len(self.graph)
         with torch.no_grad():
             with open(embeddingpath, "w") as embeddingfile:
                 embeddingfile.write(str(nlines) + " " + str(100) + "\n")
-                for key,value in tqdm(self.featureDict.items(), total=nlines):
-                    # line = l.replace(",", " ")
-                    # embeddingfile.write(line)
-
-                    embedding = self.model_l_x.embed(value).numpy().reshape(-1,).tolist()
+                for key,value in tqdm(self.graph.items(), total=nlines):
+                    feature = self.featureDict[key]
+                    if feature == []:
+                        print("save random embedding for node: {}".format(key))
+                        feature = np.random.rand(1,300)
+                    embedding = self.model_l_x.embed(feature).numpy().reshape(-1,).tolist()
                     one_line = " ".join(map(str, embedding))
                     embeddingfile.write(str(key) + " ")
                     embeddingfile.write(one_line)
@@ -329,7 +324,7 @@ class NeuralNetUnsupervised(nn.Module):
         if self.neg_samp > 0:
             print("num_x: ",self.num_x)
             print("maxindex: ",self.maxindex)
-            self.embedding_l_gy = nn.Embedding(num_embeddings = int(self.maxindex+1), embedding_dim = self.embedding_size)
+            # self.embedding_l_gy = nn.Embedding(num_embeddings = int(self.maxindex+1), embedding_dim = self.embedding_size)
         else :
             self.fc_gx2 = nn.Linear(self.embedding_size, self.num_x)
             self.nonlinearity_gx2 = nn.Softmax()
@@ -340,7 +335,9 @@ class NeuralNetUnsupervised(nn.Module):
         l_gx = self.nonlinearity_gx(l_gx)
         
         if self.neg_samp > 0:
-            l_gy = self.embedding_l_gy(gy.long())
+            #l_gy = self.embedding_l_gy(gy.long())
+            l_gy = self.fc_gx(gy.float())
+            l_gy = self.nonlinearity_gx(l_gy)
             return l_gy, l_gx
         else:
             l_gx = self.fc_gx2(l_gx)
@@ -349,7 +346,7 @@ class NeuralNetUnsupervised(nn.Module):
         
     def get_hiddenLayer(self):
         return self.fc_gx.weight
-            
+
     
 class NeuralNetSupervised(nn.Module):
     def __init__(self, use_feature, embedding_size, num_ver, y_shape, layer_loss, hiddenLayerWeight, **kwargs):
