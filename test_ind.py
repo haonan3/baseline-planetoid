@@ -54,7 +54,7 @@ def main():
     m.init_train(init_iter_label = 10000, init_iter_graph = 400)    # pre-training
     # m.init_train(init_iter_label=1, init_iter_graph=1)  # pre-training
     iter_cnt, max_accu = 0, 0
-    while (time.time() - start_time) < 89500:
+    while (time.time() - start_time) < 70000:
     # while (time.time() - start_time) < 30:
         m.step_train(max_iter = 10, iter_graph = 0.1, iter_inst = 1, iter_label = 0) # perform a training step
         tpy = m.predict(tx1, tx2)                                                         # predict the dev set

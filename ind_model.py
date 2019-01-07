@@ -99,7 +99,7 @@ class ind_model(base_model):
                     l_gy, l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                     gz=torch.tensor(gz)
                     g_loss = - torch.log( g_loss_criterion( torch.sum(l_gx * l_gy, dim = 1) * gz )  ) .sum()
-                    print('iter graph', g_loss)
+                    # print('iter graph', g_loss)
                 else:
                     l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                     gy=torch.LongTensor(gy)
@@ -127,7 +127,7 @@ class ind_model(base_model):
                 optimizer_x.zero_grad()
                 loss.backward()
                 optimizer_x.step()
-                print ('iter inst', loss)
+                # print ('iter inst', loss)
 
             ### gen_label_graph
             for _ in range(self.comp_iter(iter_label)):
@@ -136,7 +136,7 @@ class ind_model(base_model):
                     l_gy, l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                     gz=torch.tensor(gz)
                     g_loss = - torch.log( g_loss_criterion( torch.sum(l_gx * l_gy, dim = 1) * gz )  ) .sum()
-                    print ('iter label graph', g_loss)
+                    # print ('iter label graph', g_loss)
                 else:
                     l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                     gy=torch.LongTensor(gy)
