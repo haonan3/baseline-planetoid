@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import sys
 
 import torch
 import torch.nn as nn
@@ -112,14 +113,11 @@ class ind_model(base_model):
             ### gen_train_inst
             for _ in range(self.comp_iter(iter_inst)):
                 x1, x2, y = next(self.inst_generator)
-                #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
-                #print("Before--sup-net weight:\n")
-                a = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(),axis=1)
-
-                #print("Before--unsup-net weight:\n")
-                b = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(),axis=1)
-
-
+                # #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
+                # #print("Before--sup-net weight:\n")
+                # a = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(),axis=1)
+                # #print("Before--unsup-net weight:\n")
+                # b = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(),axis=1)
 
                 if self.layer_loss and self.use_feature:
                     hid_sym1, emd_sym1, hid_sym2, emd_sym2, py_sym = self.model_l_x(x1, x2)
@@ -137,22 +135,22 @@ class ind_model(base_model):
                 loss.backward()
                 optimizer_x.step()
 
-                #print("After--sup-net weight:\n")
-                c = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(), axis=1)
-
-                #print("After--unsup-net weight:\n")
-                d = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(), axis=1)
-
-                if a.shape != c.shape or b.shape != d.shape or False in list(a == c) or False in list(b == d):
-                    equal_before_update = False not in list(a==b)
-                    equal_after_update = False not in list(c==d)
-                    update1 = False in list(a == c)
-                    update2 = False in list(b == d)
-                    print("update as expected:{}".format(equal_before_update and equal_after_update and update1 and update2))
-                    print(a.shape)
-                    print(b.shape)
-                    print(c.shape)
-                    print(d.shape)
+                # #print("After--sup-net weight:\n")
+                # c = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(), axis=1)
+                #
+                # #print("After--unsup-net weight:\n")
+                # d = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(), axis=1)
+                #
+                # if a.shape != c.shape or b.shape != d.shape or False in list(a == c) or False in list(b == d):
+                #     equal_before_update = False not in list(a == b)
+                #     equal_after_update = False not in list(c == d)
+                #     update1 = False in list(a == c)
+                #     update2 = False in list(b == d)
+                #     print("update as expected:{}".format(equal_before_update and equal_after_update and update1 and update2))
+                #     print(a.shape)
+                #     print(b.shape)
+                #     print(c.shape)
+                #     print(d.shape)
 
             ### gen_label_graph
             for _ in range(self.comp_iter(iter_label)):
@@ -322,6 +320,7 @@ class ind_model(base_model):
                     if feature == []:
                         print("save random embedding for node: {}".format(key))
                         feature = np.random.rand(1,300)
+                        sys.exit()
                     embedding = self.model_l_x.embed(feature).reshape(-1,).tolist()
                     one_line = " ".join(map(str, embedding))
                     embeddingfile.write(str(key) + " ")
@@ -455,11 +454,10 @@ class NeuralNetSupervised(nn.Module):
 
     def embed(self, node_feature):
         node_feature = torch.tensor(node_feature).float()
-        l_x1_1 = self.fc_node1_x1(node_feature)
-        l_x1_1 = self.nonlinearity_node1_x1(l_x1_1)
+        #l_x1_1 = self.fc_node1_x1(node_feature)
+        #l_x1_1 = self.nonlinearity_node1_x1(l_x1_1)
         l_x1_2 = torch.mm(node_feature, self.hiddenLayerWeight.t())
         l_x1_2 = self.nonlinearity_node1_x2_1(l_x1_2)
-        l_x1_2 = self.fc_node1_x2_2(l_x1_2)
-        l_x1_2 = self.nonlinearity_node1_x2_2(l_x1_2)
-
-        return np.hstack((l_x1_1, l_x1_2))
+        #l_x1_2 = self.fc_node1_x2_2(l_x1_2)
+        #l_x1_2 = self.nonlinearity_node1_x2_2(l_x1_2)
+        return l_x1_2
