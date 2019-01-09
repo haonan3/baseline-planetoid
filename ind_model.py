@@ -113,9 +113,9 @@ class ind_model(base_model):
             for _ in range(self.comp_iter(iter_inst)):
                 x1, x2, y = next(self.inst_generator)
 
-                print("sup-net weight:\n")
+                print("Before--sup-net weight:\n")
                 print(self.model_l_x.hiddenLayerWeight)
-                print("unsup-net weight:\n")
+                print("Before--unsup-net weight:\n")
                 print(self.model_l_gx.get_hiddenLayer())
 
                 if self.layer_loss and self.use_feature:
@@ -134,9 +134,9 @@ class ind_model(base_model):
                 loss.backward()
                 optimizer_x.step()
 
-                print("sup-net weight:\n")
+                print("After--sup-net weight:\n")
                 print(self.model_l_x.hiddenLayerWeight)
-                print("unsup-net weight:\n")
+                print("After--unsup-net weight:\n")
                 print(self.model_l_gx.get_hiddenLayer())
 
             ### gen_label_graph
