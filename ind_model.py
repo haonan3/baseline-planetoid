@@ -112,11 +112,14 @@ class ind_model(base_model):
             ### gen_train_inst
             for _ in range(self.comp_iter(iter_inst)):
                 x1, x2, y = next(self.inst_generator)
+                #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
+                #print("Before--sup-net weight:\n")
+                a = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(),axis=1)
 
-                print("Before--sup-net weight:\n")
-                print(self.model_l_x.hiddenLayerWeight)
-                print("Before--unsup-net weight:\n")
-                print(self.model_l_gx.get_hiddenLayer())
+                #print("Before--unsup-net weight:\n")
+                b = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(),axis=1)
+
+
 
                 if self.layer_loss and self.use_feature:
                     hid_sym1, emd_sym1, hid_sym2, emd_sym2, py_sym = self.model_l_x(x1, x2)
@@ -134,10 +137,22 @@ class ind_model(base_model):
                 loss.backward()
                 optimizer_x.step()
 
-                print("After--sup-net weight:\n")
-                print(self.model_l_x.hiddenLayerWeight)
-                print("After--unsup-net weight:\n")
-                print(self.model_l_gx.get_hiddenLayer())
+                #print("After--sup-net weight:\n")
+                c = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(), axis=1)
+
+                #print("After--unsup-net weight:\n")
+                d = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(), axis=1)
+
+                if a.shape != c.shape or b.shape != d.shape or False in list(a == c) or False in list(b == d):
+                    equal_before_update = False not in list(a==b)
+                    equal_after_update = False not in list(c==d)
+                    update1 = False in list(a == c)
+                    update2 = False in list(b == d)
+                    print("update as expected:{}".format(equal_before_update and equal_after_update and update1 and update2))
+                    print(a.shape)
+                    print(b.shape)
+                    print(c.shape)
+                    print(d.shape)
 
             ### gen_label_graph
             for _ in range(self.comp_iter(iter_label)):
