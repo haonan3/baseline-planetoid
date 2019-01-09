@@ -112,6 +112,12 @@ class ind_model(base_model):
             ### gen_train_inst
             for _ in range(self.comp_iter(iter_inst)):
                 x1, x2, y = next(self.inst_generator)
+
+                print("sup-net weight:\n")
+                print(self.model_l_x.hiddenLayerWeight)
+                print("unsup-net weight:\n")
+                print(self.model_l_gx.get_hiddenLayer())
+
                 if self.layer_loss and self.use_feature:
                     hid_sym1, emd_sym1, hid_sym2, emd_sym2, py_sym = self.model_l_x(x1, x2)
 
@@ -127,7 +133,11 @@ class ind_model(base_model):
                 optimizer_x.zero_grad()
                 loss.backward()
                 optimizer_x.step()
-                # print ('iter inst', loss)
+
+                print("sup-net weight:\n")
+                print(self.model_l_x.hiddenLayerWeight)
+                print("unsup-net weight:\n")
+                print(self.model_l_gx.get_hiddenLayer())
 
             ### gen_label_graph
             for _ in range(self.comp_iter(iter_label)):
@@ -361,33 +371,35 @@ class NeuralNetSupervised(nn.Module):
         self.hiddenLayerWeight = hiddenLayerWeight
         
         #node1 direction1
-        #self.fc_node1_x1 = nn.Linear(self.num_ver, self.y_shape )
-        self.fc_node1_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
+        self.fc_node1_x1 = nn.Linear(self.num_ver, self.y_shape )
+        #self.fc_node1_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
         self.nonlinearity_node1_x1 = nn.Softmax()
 
         #node2 direction1
-        #self.fc_node2_x1 = nn.Linear(self.num_ver, self.y_shape)
-        self.fc_node2_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
+        self.fc_node2_x1 = nn.Linear(self.num_ver, self.y_shape)
+        #self.fc_node2_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
         self.nonlinearity_node2_x1 = nn.Softmax()
 
         #node1 direction2
         self.nonlinearity_node1_x2_1 = nn.ReLU()
-        #self.fc_node1_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
-        self.fc_node1_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
+        self.fc_node1_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
+        #self.fc_node1_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
         self.nonlinearity_node1_x2_2 = nn.Softmax()
 
         #node2 direction2
         self.nonlinearity_node2_x2_1 = nn.ReLU()
-        #self.fc_node2_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
-        self.fc_node2_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
+        self.fc_node2_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
+        #self.fc_node2_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
         self.nonlinearity_node2_x2_2 = nn.Softmax()
 
 
         if self.use_feature:
-            self.fc_cat_four_feature = nn.Linear(self.embedding_size * 2, self.y_shape)
+            self.fc_cat_four_feature = nn.Linear(self.y_shape * 4, self.y_shape)
+            #self.fc_cat_four_feature = nn.Linear(self.embedding_size * 2, self.y_shape)
             self.nonlinearity_cat_four_feature = nn.Softmax()
         else:
-            self.fc_cat_two_feature = nn.Linear(self.embedding_size * 1, self.y_shape)
+            self.fc_cat_two_feature = nn.Linear(self.y_shape * 2, self.y_shape)
+            #self.fc_cat_two_feature = nn.Linear(self.embedding_size * 1, self.y_shape)
             self.nonlinearity_cat_two_feature = nn.Softmax()
 
 
@@ -435,4 +447,4 @@ class NeuralNetSupervised(nn.Module):
         l_x1_2 = self.fc_node1_x2_2(l_x1_2)
         l_x1_2 = self.nonlinearity_node1_x2_2(l_x1_2)
 
-        return np.hstack((l_x1_1,l_x1_2))
+        return np.hstack((l_x1_1, l_x1_2))
