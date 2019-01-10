@@ -385,35 +385,35 @@ class NeuralNetSupervised(nn.Module):
         self.hiddenLayerWeight = hiddenLayerWeight
         
         #node1 direction1
-        self.fc_node1_x1 = nn.Linear(self.num_ver, self.y_shape )
-        #self.fc_node1_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
+        #self.fc_node1_x1 = nn.Linear(self.num_ver, self.y_shape )
+        self.fc_node1_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
         self.nonlinearity_node1_x1 = nn.Softmax()
 
         #node2 direction1
-        self.fc_node2_x1 = nn.Linear(self.num_ver, self.y_shape)
-        #self.fc_node2_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
+        #self.fc_node2_x1 = nn.Linear(self.num_ver, self.y_shape)
+        self.fc_node2_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
         self.nonlinearity_node2_x1 = nn.Softmax()
 
         #node1 direction2
         self.nonlinearity_node1_x2_1 = nn.ReLU()
-        self.fc_node1_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
-        #self.fc_node1_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
+        #self.fc_node1_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
+        self.fc_node1_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
         self.nonlinearity_node1_x2_2 = nn.Softmax()
 
         #node2 direction2
         self.nonlinearity_node2_x2_1 = nn.ReLU()
-        self.fc_node2_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
-        #self.fc_node2_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
+        #self.fc_node2_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
+        self.fc_node2_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
         self.nonlinearity_node2_x2_2 = nn.Softmax()
 
 
         if self.use_feature:
-            self.fc_cat_four_feature = nn.Linear(self.y_shape * 4, self.y_shape)
-            #self.fc_cat_four_feature = nn.Linear(self.embedding_size * 2, self.y_shape)
+            #self.fc_cat_four_feature = nn.Linear(self.y_shape * 4, self.y_shape)
+            self.fc_cat_four_feature = nn.Linear(self.embedding_size * 2, self.y_shape)
             self.nonlinearity_cat_four_feature = nn.Softmax()
         else:
-            self.fc_cat_two_feature = nn.Linear(self.y_shape * 2, self.y_shape)
-            #self.fc_cat_two_feature = nn.Linear(self.embedding_size * 1, self.y_shape)
+            #self.fc_cat_two_feature = nn.Linear(self.y_shape * 2, self.y_shape)
+            self.fc_cat_two_feature = nn.Linear(self.embedding_size * 1, self.y_shape)
             self.nonlinearity_cat_two_feature = nn.Softmax()
 
 
@@ -453,10 +453,11 @@ class NeuralNetSupervised(nn.Module):
 
     def embed(self, node_feature):
         node_feature = torch.tensor(node_feature).float()
-        #l_x1_1 = self.fc_node1_x1(node_feature)
-        #l_x1_1 = self.nonlinearity_node1_x1(l_x1_1)
+        l_x1_1 = self.fc_node1_x1(node_feature)
+        l_x1_1 = self.nonlinearity_node1_x1(l_x1_1)
         l_x1_2 = torch.mm(node_feature, self.hiddenLayerWeight.t())
         l_x1_2 = self.nonlinearity_node1_x2_1(l_x1_2)
-        #l_x1_2 = self.fc_node1_x2_2(l_x1_2)
-        #l_x1_2 = self.nonlinearity_node1_x2_2(l_x1_2)
-        return l_x1_2
+        l_x1_2 = self.fc_node1_x2_2(l_x1_2)
+        l_x1_2 = self.nonlinearity_node1_x2_2(l_x1_2)
+        return torch.cat((l_x1_1, l_x1_2), dim=1).numpy()
+        #return l_x1_2
