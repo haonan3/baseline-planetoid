@@ -436,7 +436,6 @@ class NeuralNetSupervised(nn.Module):
             l_x2_2 = self.fc_node2_x2_2(l_x2_2)
             l_x2_2 = self.nonlinearity_node2_x2_2(l_x2_2)
 
-
             if self.use_feature:
                 l_x = torch.cat((l_x1_1, l_x1_2, l_x2_1, l_x2_2), dim=1)
                 l_x = self.fc_cat_four_feature(l_x)
