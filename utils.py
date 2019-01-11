@@ -69,9 +69,9 @@ def readRel(relpath):
 def makeFeatureMatrix(features, graph):
     feature_matrix = []
     for key in graph:
-        if features[key] == []:
+        if key not in features:
             print("there are node not in feature file")
-            sys.exit()
+            #sys.exit()
         feature_matrix.append(features[key])
     return np.array(feature_matrix).reshape(-1,300)
 
@@ -83,11 +83,11 @@ def makeTestFeature(tx, features):
         if tx[i,0] not in features:
             print("there are test node not in feature file, makeTestFeature")
             print(tx[i,0])
-            sys.exit()
+            #sys.exit()
         TestFeature1.append(features[tx[i,0]])
         if tx[i,1] not in features:
             print("there are test node not in feature file, makeTestFeature")
             print(tx[i,1])
-            sys.exit()
+            #sys.exit()
         TestFeature2.append(features[tx[i,1]])
     return np.array(TestFeature1).reshape((-1,300)), np.array(TestFeature2).reshape((-1,300))

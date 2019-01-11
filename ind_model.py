@@ -205,7 +205,7 @@ class ind_model(base_model):
                     if node1[idx] not in self.featureDict:
                         print("in gen_train_inst")
                         print("set random feature for node {}".format(node1[idx]))
-                        sys.exit()
+                        #sys.exit()
                         # self.featureDict[node1[idx]] = np.random.rand(1,300)
                     node1_feature = self.featureDict[node1[idx]]
                     node1_features.append(node1_feature)
@@ -213,7 +213,7 @@ class ind_model(base_model):
                     if node2[idx] not in self.featureDict:
                         print("in gen_train_inst")
                         print("set random feature for node {}".format(node1[idx]))
-                        sys.exit()
+                        #sys.exit()
                         #self.featureDict[node2[idx]] = np.random.rand(1,300)
                     node2_feature = self.featureDict[node2[idx]]
                     node2_features.append(node2_feature)
@@ -243,7 +243,7 @@ class ind_model(base_model):
                         if path[-1] not in self.graph:
                             print("gen_graph")
                             print("{} not in graph".format(path[-1]))
-                            sys.exit()
+                            #sys.exit()
                         path.append( random.choice(self.graph[path[-1]]) )
 
                     for l in range(len(path)):
@@ -309,14 +309,14 @@ class ind_model(base_model):
                 if i not in self.featureDict:
                     print("in gen_label_graph, if")
                     print("{} not in dict".format(i))
-                    sys.exit()
+                    #sys.exit()
                 feature = self.featureDict[i]
                 features1.append(feature)
             for i in g[:, 1]:
                 if i not in self.featureDict:
                     print("in, gen_label_graph, else")
                     print("{} not in dict".format(i))
-                    sys.exit()
+                    #sys.exit()
                 feature = self.featureDict[i]
                 features2.append(feature)
             yield np.array(features1).reshape((-1,300)), np.array(features2).reshape((-1,300)), gy
@@ -328,35 +328,25 @@ class ind_model(base_model):
         # extract label and feature
         # input feature and concat label and embedding
         # write the result
-        rand_feature = []
         print("make embedding...")
-        #nlines = len(self.graph)
         nlines = len(self.graph)
+        key_list = []
+        embedding = np.zeros((nlines,100))
+        idx = 0
         with torch.no_grad():
-            with open(embeddingpath, "w") as embeddingfile:
-                embeddingfile.write(str(nlines) + " " + str(100) + "\n")
+            for key in tqdm(self.graph, total=nlines):
+                # get feature
+                if key not in self.featureDict:
+                    print("node: {}, not in feature dict".format(key))
+                    #sys.exit()
+                key_list.append(key)
+                feature = self.featureDict[key]
+                embedding[idx] = self.model_l_x.embed(feature).reshape(-1,)
+                idx += 1
 
-                for key in tqdm(self.graph, total=nlines):
-                    # get feature
-                    if key not in self.featureDict:
-                        print("node: {}, not in feature dict".format(key))
-                    feature = self.featureDict[key]
-                    if feature == []:
-                        # print("save random embedding for node: {}".format(key))
-                        print("the key:{}\n".format(key))
-                        print("graph dict size: {}\n".format(nlines))
-                        print("feature dict size: {}\n".format(len(self.featureDict)))
-                        feature = np.random.rand(1,300)
-                        rand_feature.append(key)
-                        # sys.exit()
-                    # embed
-                    embedding = self.model_l_x.embed(feature).reshape(-1,).tolist()
-                    one_line = " ".join(map(str, embedding))
-                    embeddingfile.write(str(key) + " ")
-                    embeddingfile.write(one_line)
-                    embeddingfile.write("\n")
-                print("random feature for following node:\n")
-                print(len(rand_feature))
+            learned_embed = gensim.models.keyedvectors.Word2VecKeyedVectors(embedding.shape[1])
+            learned_embed.add(key_list, embedding)
+            learned_embed.save_word2vec_format(fname=embeddingpath, binary=False, total_vec=len(key_list))
 
 
 
