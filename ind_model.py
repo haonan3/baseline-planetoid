@@ -204,10 +204,12 @@ class ind_model(base_model):
                 node2_features = []
                 for idx in range(j-i):
                     if self.featureDict[node1[idx]] == []:
+                        print("set random feature for node {}".format(node1[idx]))
                         self.featureDict[node1[idx]] = np.random.rand(1,300)
                     node1_feature = self.featureDict[node1[idx]]
                     node1_features.append(node1_feature)
                     if self.featureDict[node2[idx]] == []:
+                        print("set random feature for node {}".format(node1[idx]))
                         self.featureDict[node2[idx]] = np.random.rand(1,300)
                     node2_feature = self.featureDict[node2[idx]]
                     node2_features.append(node2_feature)
