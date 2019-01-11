@@ -313,19 +313,24 @@ class ind_model(base_model):
         rand_feature = []
         print("make embedding...")
         #nlines = len(self.graph)
-        nlines = len(self.featureDict)
+        nlines = len(self.graph)
         print("dict size: {}".format(nlines))
         with torch.no_grad():
             with open(embeddingpath, "w") as embeddingfile:
                 embeddingfile.write(str(nlines) + " " + str(100) + "\n")
-                for key in tqdm(self.featureDict, total=nlines):
+
+                for key in tqdm(self.graph, total=nlines):
+                    # get feature
+                    if key not in self.featureDict:
+                        print("node: {}, not in feature dict".format(key))
                     feature = self.featureDict[key]
                     if feature == []:
-                        print("save random embedding for node: {}".format(key))
+                        # print("save random embedding for node: {}".format(key))
                         print("the key:{}".format(key))
                         feature = np.random.rand(1,300)
                         rand_feature.append(key)
                         sys.exit()
+                    # embed
                     embedding = self.model_l_x.embed(feature).reshape(-1,).tolist()
                     one_line = " ".join(map(str, embedding))
                     embeddingfile.write(str(key) + " ")

@@ -46,6 +46,7 @@ def main():
     features = makeFeatureDict(args.feature_path)
     x, y = readRel(args.rel_train_path)
     tx, ty = readRel(args.rel_test_path)
+    print("make feature matrix according to graph node")
     allx = makeFeatureMatrix(features, graph)
     print(allx.shape)
     tx1, tx2 = makeTestFeature(tx, features)
@@ -54,10 +55,10 @@ def main():
     m = model(args)                                                 # initialize the model
     m.add_data(x, y, allx, graph, features, maxindex)                                   # add data
     m.build()                                                       # build the model
-    m.init_train(init_iter_label = 10000, init_iter_graph = 400)    # pre-training
-    #m.init_train(init_iter_label=1, init_iter_graph=1)  # pre-training
+    #m.init_train(init_iter_label = 10000, init_iter_graph = 400)    # pre-training
+    m.init_train(init_iter_label=1, init_iter_graph=1)  # pre-training
     iter_cnt, max_accu = 0, 0
-    while iter_cnt < 16000:
+    while iter_cnt < 16:
         m.step_train(max_iter = 10, iter_graph = 0.1, iter_inst = 1, iter_label = 0) # perform a training step
         tpy = m.predict(tx1, tx2)                                                         # predict the dev set
 
