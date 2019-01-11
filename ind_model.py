@@ -241,6 +241,7 @@ class ind_model(base_model):
                     for _ in range(self.path_size):
                         # random choice a neighbor from neighbors of the last node in the path  ---random walk
                         if path[-1] not in self.graph:
+                            print("gen_graph")
                             print("{} not in graph".format(path[-1]))
                             sys.exit()
                         path.append( random.choice(self.graph[path[-1]]) )
@@ -306,12 +307,14 @@ class ind_model(base_model):
             features2 = []
             for i in g[:, 0]:
                 if i not in self.featureDict:
+                    print("in gen_label_graph, if")
                     print("{} not in dict".format(i))
                     sys.exit()
                 feature = self.featureDict[i]
                 features1.append(feature)
             for i in g[:, 1]:
                 if i not in self.featureDict:
+                    print("in, gen_label_graph, else")
                     print("{} not in dict".format(i))
                     sys.exit()
                 feature = self.featureDict[i]
@@ -362,7 +365,7 @@ class ind_model(base_model):
 class NeuralNetUnsupervised(nn.Module):
     def __init__(self, num_ver, num_x, maxindex, embedding_size,neg_samp,  **kwargs):
         super(NeuralNetUnsupervised, self).__init__()
-        
+
         self.num_ver = num_ver
         self.num_x = num_x
         self.maxindex = maxindex
