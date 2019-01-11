@@ -331,8 +331,8 @@ class ind_model(base_model):
                     embeddingfile.write(str(key) + " ")
                     embeddingfile.write(one_line)
                     embeddingfile.write("\n")
-                    print("random feature for following node:\n")
-                    print(len(rand_feature))
+                print("random feature for following node:\n")
+                print(len(rand_feature))
 
 
 
