@@ -316,7 +316,6 @@ class ind_model(base_model):
         print("make embedding...")
         #nlines = len(self.graph)
         nlines = len(self.graph)
-        print("dict size: {}".format(nlines))
         with torch.no_grad():
             with open(embeddingpath, "w") as embeddingfile:
                 embeddingfile.write(str(nlines) + " " + str(100) + "\n")
@@ -328,10 +327,12 @@ class ind_model(base_model):
                     feature = self.featureDict[key]
                     if feature == []:
                         # print("save random embedding for node: {}".format(key))
-                        print("the key:{}".format(key))
+                        print("the key:{}\n".format(key))
+                        print("graph dict size: {}\n".format(nlines))
+                        print("feature dict size: {}\n".format(len(self.featureDict)))
                         feature = np.random.rand(1,300)
                         rand_feature.append(key)
-                        sys.exit()
+                        # sys.exit()
                     # embed
                     embedding = self.model_l_x.embed(feature).reshape(-1,).tolist()
                     one_line = " ".join(map(str, embedding))
