@@ -36,26 +36,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="1599" />
-          <entry key="py" value="6305" />
+          <entry key="Python Console" value="1805" />
+          <entry key="py" value="6408" />
           <entry key="sh" value="49" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="49" />
-          <entry key="Python" value="7904" />
+          <entry key="Python" value="8213" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ind_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="317" column="72" lean-forward="true" selection-start-line="317" selection-start-column="16" selection-end-line="317" selection-end-column="72" />
+            <state relative-caret-position="216">
+              <caret line="318" column="22" selection-start-line="318" selection-start-column="22" selection-end-line="318" selection-end-column="22" />
               <folding>
                 <element signature="e#47#57#0" expanded="true" />
               </folding>
@@ -66,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_ind.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="79">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
               <folding>
                 <element signature="e#48#88#0" expanded="true" />
               </folding>
@@ -75,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="251">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <marker date="1546856809193" expanded="true" signature="1391:1879" ph="..." />
@@ -246,13 +246,13 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5509259" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.7048611" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.7314815" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.0" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3298611" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.5775463" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -269,8 +269,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/utils.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="58" />
+          <line>68</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -335,20 +335,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ind_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="317" column="72" lean-forward="true" selection-start-line="317" selection-start-column="16" selection-end-line="317" selection-end-column="72" />
-          <folding>
-            <element signature="e#47#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_ind.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="79">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="e#48#88#0" expanded="true" />
           </folding>
@@ -357,12 +347,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="251">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <marker date="1546856809193" expanded="true" signature="1391:1879" ph="..." />
             <marker date="1546856809193" expanded="true" signature="2295:2300" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ind_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="318" column="22" selection-start-line="318" selection-start-column="22" selection-end-line="318" selection-end-column="22" />
+          <folding>
+            <element signature="e#47#57#0" expanded="true" />
           </folding>
         </state>
       </provider>

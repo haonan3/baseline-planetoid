@@ -312,11 +312,13 @@ class ind_model(base_model):
         # write the result
         rand_feature = []
         print("make embedding...")
-        nlines = len(self.graph)
+        #nlines = len(self.graph)
+        nlines = len(self.featureDict)
+        print("dict size: {}".format(nlines))
         with torch.no_grad():
             with open(embeddingpath, "w") as embeddingfile:
                 embeddingfile.write(str(nlines) + " " + str(100) + "\n")
-                for key,value in tqdm(self.graph.items(), total=nlines):
+                for key in tqdm(self.featureDict, total=nlines):
                     feature = self.featureDict[key]
                     if feature == []:
                         print("save random embedding for node: {}".format(key))
@@ -329,7 +331,7 @@ class ind_model(base_model):
                     embeddingfile.write(one_line)
                     embeddingfile.write("\n")
                     print("random feature for following node:\n")
-                    print(rand_feature)
+                    print(len(rand_feature))
 
 
 
