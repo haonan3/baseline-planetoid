@@ -322,9 +322,10 @@ class ind_model(base_model):
                     feature = self.featureDict[key]
                     if feature == []:
                         print("save random embedding for node: {}".format(key))
+                        print("the key:{}".format(key))
                         feature = np.random.rand(1,300)
                         rand_feature.append(key)
-                        # sys.exit()
+                        sys.exit()
                     embedding = self.model_l_x.embed(feature).reshape(-1,).tolist()
                     one_line = " ".join(map(str, embedding))
                     embeddingfile.write(str(key) + " ")
