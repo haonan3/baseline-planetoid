@@ -15,7 +15,6 @@ from tqdm import tqdm
 
 class ind_model(base_model):
     def add_data(self, x, y, allx, graph, features, maxindex):
-        
         self.x, self.y, self.allx, self.graph, self.featureDict = x, y, allx, graph, features
         self.maxindex = maxindex
         self.num_ver = self.allx.shape[1]
@@ -56,7 +55,7 @@ class ind_model(base_model):
             optimizer.zero_grad()
             g_loss.backward()
             optimizer.step()
-            # print ('iter label', i, g_loss)
+
 
 
         ### gen_graph
@@ -65,7 +64,7 @@ class ind_model(base_model):
             if self.neg_samp > 0:
                 l_gy, l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                 gz=torch.tensor(gz)
-                g_loss = - torch.log( g_loss_criterion( torch.sum(l_gx * l_gy, dim = 1) * gz )  ) .sum()
+                g_loss = - torch.log(g_loss_criterion(torch.sum(l_gx * l_gy, dim = 1) * gz)) .sum()
             else:
                 l_gx = self.model_l_gx(torch.tensor(np.array(gx)), torch.tensor(gy))
                 gy=torch.LongTensor(gy)
@@ -74,7 +73,7 @@ class ind_model(base_model):
             optimizer.zero_grad()
             g_loss.backward()
             optimizer.step()
-            # print ('iter graph', i, g_loss)
+
 
 
     def step_train(self, max_iter, iter_graph, iter_inst, iter_label):
@@ -203,14 +202,19 @@ class ind_model(base_model):
                 node1_features = []
                 node2_features = []
                 for idx in range(j-i):
-                    if self.featureDict[node1[idx]] == []:
+                    if node1[idx] not in self.featureDict:
+                        print("in gen_train_inst")
                         print("set random feature for node {}".format(node1[idx]))
-                        self.featureDict[node1[idx]] = np.random.rand(1,300)
+                        sys.exit()
+                        # self.featureDict[node1[idx]] = np.random.rand(1,300)
                     node1_feature = self.featureDict[node1[idx]]
                     node1_features.append(node1_feature)
-                    if self.featureDict[node2[idx]] == []:
+
+                    if node2[idx] not in self.featureDict:
+                        print("in gen_train_inst")
                         print("set random feature for node {}".format(node1[idx]))
-                        self.featureDict[node2[idx]] = np.random.rand(1,300)
+                        sys.exit()
+                        #self.featureDict[node2[idx]] = np.random.rand(1,300)
                     node2_feature = self.featureDict[node2[idx]]
                     node2_features.append(node2_feature)
 
@@ -230,12 +234,15 @@ class ind_model(base_model):
                 g, gy = [], []
                 j = min(ind.shape[0], i + self.g_batch_size)
                 for k in ind[i:j]:
-                    if len(self.graph[k]) == 0:
+                    if k not in self.graph:
                         continue
                     path = [k]
 
                     for _ in range(self.path_size):
                         # random choice a neighbor from neighbors of the last node in the path  ---random walk
+                        if path[-1] not in self.graph:
+                            print("{} not in graph".format(path[-1]))
+                            sys.exit()
                         path.append( random.choice(self.graph[path[-1]]) )
 
                     for l in range(len(path)):
@@ -298,9 +305,15 @@ class ind_model(base_model):
             features1 = []
             features2 = []
             for i in g[:, 0]:
+                if i not in self.featureDict:
+                    print("{} not in dict".format(i))
+                    sys.exit()
                 feature = self.featureDict[i]
                 features1.append(feature)
             for i in g[:, 1]:
+                if i not in self.featureDict:
+                    print("{} not in dict".format(i))
+                    sys.exit()
                 feature = self.featureDict[i]
                 features2.append(feature)
             yield np.array(features1).reshape((-1,300)), np.array(features2).reshape((-1,300)), gy

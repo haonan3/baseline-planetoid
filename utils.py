@@ -1,4 +1,6 @@
 import random
+import sys
+
 import numpy as np
 import collections
 from tqdm import tqdm
@@ -69,7 +71,8 @@ def makeFeatureMatrix(features, graph):
     for key in graph:
         if features[key] == []:
             print("there are node not in feature file")
-            features[key] = np.random.rand(1,300)
+            sys.exit()
+            #features[key] = np.random.rand(1,300)
         feature_matrix.append(features[key])
     return np.array(feature_matrix).reshape(-1,300)
 
@@ -80,10 +83,14 @@ def makeTestFeature(tx, features):
     for i in range(tx.shape[0]):
         if features[tx[i,0]] == []:
             print("there are test node not in feature file")
-            features[tx[i, 0]] = np.random.rand(1,300)
+            print(tx[i,0])
+            sys.exit()
+            #features[tx[i, 0]] = np.random.rand(1,300)
         TestFeature1.append(features[tx[i,0]])
         if features[tx[i,1]] == []:
             print("there are test node not in feature file")
-            features[tx[i, 1]] = np.random.rand(1,300)
+            print(tx[i,1])
+            sys.exit()
+            #features[tx[i, 1]] = np.random.rand(1,300)
         TestFeature2.append(features[tx[i,1]])
     return np.array(TestFeature1).reshape((-1,300)), np.array(TestFeature2).reshape((-1,300))
