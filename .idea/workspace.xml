@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ab801e2-51ac-44bd-bd88-631188fb2fa4" name="Default Changelist" comment="" />
+    <list default="true" id="8ab801e2-51ac-44bd-bd88-631188fb2fa4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/ind_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/ind_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_ind.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_ind.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,27 +26,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="12" />
+          <entry key="py" value="14" />
           <entry key="sh" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="12" />
+          <entry key="Python" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="1945" />
-          <entry key="py" value="7083" />
+          <entry key="Python Console" value="2091" />
+          <entry key="py" value="7226" />
           <entry key="sh" value="49" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="49" />
-          <entry key="Python" value="9028" />
+          <entry key="Python" value="9317" />
         </counts>
       </usages-collector>
     </session>
@@ -52,13 +56,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ind_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6279">
-              <caret line="323" lean-forward="true" selection-start-line="323" selection-end-line="323" />
+            <state relative-caret-position="4815">
+              <caret line="446" column="25" selection-start-line="446" selection-start-column="25" selection-end-line="446" selection-end-column="25" />
               <folding>
                 <element signature="e#47#57#0" expanded="true" />
                 <element signature="e#3052#3438#1" />
                 <element signature="e#4774#4819#0" />
                 <element signature="e#5986#6022#0" />
+                <element signature="e#7354#7826#0" />
+                <element signature="e#7867#9437#0" />
+                <element signature="e#9473#11114#0" />
+                <element signature="e#11156#12852#0" />
+                <element signature="e#14158#15141#0" />
               </folding>
             </state>
           </provider>
@@ -67,8 +76,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_ind.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="506">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
               <folding>
                 <element signature="e#48#88#0" expanded="true" />
               </folding>
@@ -79,12 +88,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1007">
-              <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+            <state relative-caret-position="292">
+              <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1547198391240" expanded="true" signature="1403:1891" ph="..." />
-                <marker date="1547198391240" expanded="true" signature="2281:2286" ph="..." />
+                <marker date="1547271895187" expanded="true" signature="1403:1891" ph="..." />
+                <marker date="1547271895187" expanded="true" signature="2331:2336" ph="..." />
               </folding>
             </state>
           </provider>
@@ -101,8 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.y.shape</find>
-      <find>self.y_shape</find>
       <find>allx[g[:, 0]]</find>
       <find>batch_size</find>
       <find>toarray</find>
@@ -130,9 +137,12 @@
       <find>graph</find>
       <find>exi</find>
       <find>np.random.rand</find>
+      <find>#sys</find>
       <find>sys</find>
+      <find>nonlinearity_node1_x2_1</find>
     </findStrings>
     <replaceStrings>
+      <replace>sys</replace>
       <replace>#sys</replace>
     </replaceStrings>
     <dirStrings>
@@ -146,8 +156,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/train_planetoid.sh" />
-        <option value="$PROJECT_DIR$/ind_model.py" />
         <option value="$PROJECT_DIR$/utils.py" />
+        <option value="$PROJECT_DIR$/ind_model.py" />
         <option value="$PROJECT_DIR$/test_ind.py" />
       </list>
     </option>
@@ -192,7 +202,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.test_ind">
+    <configuration name="cifar10_tutorial" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="planetoid_edge" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../.." />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../../cifar10_tutorial.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test_ind" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="planetoid_edge" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -214,9 +245,14 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.test_ind" />
+      <item itemvalue="Python.cifar10_tutorial" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.test_ind" />
+        <item itemvalue="Python.cifar10_tutorial" />
       </list>
     </recent_temporary>
   </component>
@@ -251,8 +287,8 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33564815" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3298611" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.0" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
@@ -273,9 +309,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/utils.py</url>
-          <line>75</line>
-          <option name="timeStamp" value="65" />
+          <url>file://$PROJECT_DIR$/ind_model.py</url>
+          <line>345</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ind_model.py</url>
+          <line>484</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../../cifar10_tutorial.py</url>
+          <line>170</line>
+          <option name="timeStamp" value="87" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -319,13 +365,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="1067" selection-start-line="1067" selection-end-line="1067" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/base_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
@@ -340,35 +379,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="1663" selection-start-line="1663" selection-end-line="1663" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../cifar10_tutorial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2151">
+          <caret line="161" column="34" selection-start-line="161" selection-start-column="34" selection-end-line="161" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1007">
-          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="292">
+          <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1547198391240" expanded="true" signature="1403:1891" ph="..." />
-            <marker date="1547198391240" expanded="true" signature="2281:2286" ph="..." />
+            <marker date="1547271895187" expanded="true" signature="1403:1891" ph="..." />
+            <marker date="1547271895187" expanded="true" signature="2331:2336" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ind_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6279">
-          <caret line="323" lean-forward="true" selection-start-line="323" selection-end-line="323" />
+        <state relative-caret-position="4815">
+          <caret line="446" column="25" selection-start-line="446" selection-start-column="25" selection-end-line="446" selection-end-column="25" />
           <folding>
             <element signature="e#47#57#0" expanded="true" />
             <element signature="e#3052#3438#1" />
             <element signature="e#4774#4819#0" />
             <element signature="e#5986#6022#0" />
+            <element signature="e#7354#7826#0" />
+            <element signature="e#7867#9437#0" />
+            <element signature="e#9473#11114#0" />
+            <element signature="e#11156#12852#0" />
+            <element signature="e#14158#15141#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_ind.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="506">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
           <folding>
             <element signature="e#48#88#0" expanded="true" />
           </folding>

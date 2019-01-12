@@ -7,7 +7,7 @@ import time
 from utils import makeGraphDict, makeFeatureDict, readRel, makeFeatureMatrix, makeTestFeature
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--learning_rate', help = 'learning rate for supervised loss', type = float, default = 0.1)
+parser.add_argument('--learning_rate', help = 'learning rate for supervised loss', type = float, default = 0.001)
 parser.add_argument('--embedding_size', help = 'embedding dimensions', type = int, default = 100)
 parser.add_argument('--window_size', help = 'window size in random walk sequences', type = int, default = 3)
 parser.add_argument('--path_size', help = 'length of random walk sequences', type = int, default = 10)

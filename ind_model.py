@@ -89,7 +89,6 @@ class ind_model(base_model):
         criterion = nn.CrossEntropyLoss()
         optimizer_gx=torch.optim.SGD(self.model_l_gx.parameters(), lr=self.learning_rate)
         optimizer_x=torch.optim.SGD(self.model_l_x.parameters(), lr=self.learning_rate)
-        
         for _ in range(max_iter):
             ### gen_graph
             for _ in range(self.comp_iter(iter_graph)):
@@ -117,7 +116,6 @@ class ind_model(base_model):
                 # a = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(),axis=1)
                 # #print("Before--unsup-net weight:\n")
                 # b = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(),axis=1)
-
                 if self.layer_loss and self.use_feature:
                     hid_sym1, emd_sym1, hid_sym2, emd_sym2, py_sym = self.model_l_x(x1, x2)
 
@@ -205,7 +203,7 @@ class ind_model(base_model):
                     if node1[idx] not in self.featureDict:
                         print("in gen_train_inst")
                         print("set random feature for node {}".format(node1[idx]))
-                        sys.exit()
+                        #sys.exit()
                         # self.featureDict[node1[idx]] = np.random.rand(1,300)
                     node1_feature = self.featureDict[node1[idx]]
                     node1_features.append(node1_feature)
@@ -213,7 +211,7 @@ class ind_model(base_model):
                     if node2[idx] not in self.featureDict:
                         print("in gen_train_inst")
                         print("set random feature for node {}".format(node1[idx]))
-                        sys.exit()
+                        #sys.exit()
                         #self.featureDict[node2[idx]] = np.random.rand(1,300)
                     node2_feature = self.featureDict[node2[idx]]
                     node2_features.append(node2_feature)
@@ -243,7 +241,7 @@ class ind_model(base_model):
                         if path[-1] not in self.graph:
                             print("gen_graph")
                             print("{} not in graph".format(path[-1]))
-                            sys.exit()
+                            #sys.exit()
                         path.append( random.choice(self.graph[path[-1]]) )
 
                     for l in range(len(path)):
@@ -309,14 +307,14 @@ class ind_model(base_model):
                 if i not in self.featureDict:
                     print("in gen_label_graph, if")
                     print("{} not in dict".format(i))
-                    sys.exit()
+                    #sys.exit()
                 feature = self.featureDict[i]
                 features1.append(feature)
             for i in g[:, 1]:
                 if i not in self.featureDict:
                     print("in, gen_label_graph, else")
                     print("{} not in dict".format(i))
-                    sys.exit()
+                    #sys.exit()
                 feature = self.featureDict[i]
                 features2.append(feature)
             yield np.array(features1).reshape((-1,300)), np.array(features2).reshape((-1,300)), gy
@@ -338,7 +336,7 @@ class ind_model(base_model):
                 # get feature
                 if key not in self.featureDict:
                     print("node: {}, not in feature dict".format(key))
-                    sys.exit()
+                    #sys.exit()
                 key_list.append(key)
                 feature = self.featureDict[key]
                 embedding[idx] = self.model_l_x.embed(feature).reshape(-1,)
@@ -440,6 +438,11 @@ class NeuralNetSupervised(nn.Module):
 
     def forward(self, x1, x2):
             # node1 two flow direction
+            if np.sum(torch.isnan(self.hiddenLayerWeight.t()).numpy()) > 0:
+                print("There are NaNs in hidden layer weight\n")
+                print(self.hiddenLayerWeight.t())
+                sys.exit()
+
             x1=torch.tensor(x1).float()
             l_x1_1 = self.fc_node1_x1(x1)
             l_x1_1 = self.nonlinearity_node1_x1(l_x1_1)
@@ -477,7 +480,7 @@ class NeuralNetSupervised(nn.Module):
         #l_x1_1 = self.fc_node1_x1(node_feature)
         #l_x1_1 = self.nonlinearity_node1_x1(l_x1_1)
         l_x1_2 = torch.mm(node_feature, self.hiddenLayerWeight.t())
-        l_x1_2 = self.nonlinearity_node1_x2_1(l_x1_2)
+        #l_x1_2 = self.nonlinearity_node1_x2_1(l_x1_2)
         #l_x1_2 = self.fc_node1_x2_2(l_x1_2)
         #l_x1_2 = self.nonlinearity_node1_x2_2(l_x1_2)
         #return torch.cat((l_x1_1, l_x1_2), dim=1).numpy()
