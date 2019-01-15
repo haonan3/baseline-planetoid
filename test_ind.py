@@ -41,7 +41,7 @@ def comp_accu(tpy, ty):
 
 def save_log(path, max_train_accu, max_test_accu):
     with open(path, "a") as file:
-        file.write(str(max_train_accu) + " " + str(max_test_accu))
+        file.write(str(max_train_accu) + " " + str(max_test_accu) + "\n")
 
 def main():
     start_time = time.time()
