@@ -27,9 +27,10 @@ parser.add_argument('--layer_loss', help = 'whether incur loss on hidden layers'
 parser.add_argument('--graph_path', help = 'the path of graph file', type = str, default='../author_graph_dataset/author-1900-2020-link-all_copy.txt')
 parser.add_argument('--feature_path', help='the path of feature file', type = str, default='../author_graph_dataset/node-feature.csv')
 
+parser.add_argument('--log_path', help='the path of feature file', type = str, default='../author_graph_dataset/planetoid_log_path.txt')
 parser.add_argument('--rel_train_path', help='the path of training relation file', type = str, default='../author_graph_dataset/5-folder-rel/rel-train1.txt')
 parser.add_argument('--rel_test_path', help='the path of testing relation file', type = str, default='../author_graph_dataset/5-folder-rel/rel-test1.txt')
-parser.add_argument('--embedding_path', help='the save path of embedding file', type = str, default='../author_graph_dataset/planetoid_embedding1-1.txt')
+#parser.add_argument('--embedding_path', help='the save path of embedding file', type = str, default='../author_graph_dataset/planetoid_embedding1-1.txt')
 
 
 args = parser.parse_args()
@@ -38,6 +39,9 @@ def comp_accu(tpy, ty):
     import numpy as np
     return (np.argmax(tpy, axis = 1) == np.argmax(ty, axis = 1)).sum() * 1.0 / tpy.shape[0]
 
+def save_log(path, max_train_accu, max_test_accu):
+    with open(path, "a") as file:
+        file.write(str(max_train_accu) + " " + str(max_test_accu))
 
 def main():
     start_time = time.time()
@@ -49,7 +53,9 @@ def main():
     print("make feature matrix according to graph node")
     allx = makeFeatureMatrix(features, graph)
     print(allx.shape)
-    tx1, tx2 = makeTestFeature(tx, features)
+    testx1, testx2 = makeTestFeature(tx, features)
+    trainx1, trainx2 = makeTestFeature(x, features)
+
 
 
     m = model(args)                                                 # initialize the model
@@ -57,19 +63,23 @@ def main():
     m.build()                                                       # build the model
     m.init_train(init_iter_label = 10000, init_iter_graph = 400)    # pre-training
     #m.init_train(init_iter_label=1, init_iter_graph=1)  # pre-training
-    iter_cnt, max_accu = 0, 0
-    while iter_cnt < 16000:
+    iter_cnt, max_test_accu, max_train_accu = 0, 0, 0
+    while iter_cnt < 15000:
         m.step_train(max_iter = 10, iter_graph = 0.1, iter_inst = 1, iter_label = 0) # perform a training step
-        tpy = m.predict(tx1, tx2)                                                         # predict the dev set
-
-        accu = comp_accu(tpy, ty)                                                   # compute the accuracy on the dev set
-        print (iter_cnt, accu, max_accu)
+        testpy = m.predict(testx1, testx2)                                                         # predict the dev set
+        trainpy = m.predict(trainx1,trainx2)
+        test_accu = comp_accu(testpy, ty)                                                   # compute the accuracy on the dev set
+        train_accu = comp_accu(trainpy,y)
+        print("Iteration: {}, curr train acc: {}, best train acc: {}".format(iter_cnt, train_accu, max_train_accu))
+        print("Iteration: {}, curr test acc: {}, best test acc: {}".format(iter_cnt, test_accu, max_test_accu))
         iter_cnt += 1
-        if accu > max_accu:
-            max_accu = max(max_accu, accu)
+        if test_accu >= max_test_accu:
+            max_test_accu = test_accu
+        if train_accu >= max_train_accu:
+            max_train_accu = train_accu
 
-
-    m.extract_embedding(embeddingpath=args.embedding_path)
+    #m.extract_embedding(embeddingpath=args.embedding_path)
+    save_log(args.log_path, max_train_accu, max_test_accu)
     print("--- %s seconds ---" % (time.time() - start_time))
 
 if __name__ == "__main__":

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ab801e2-51ac-44bd-bd88-631188fb2fa4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ind_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/ind_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_ind.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_ind.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,10 +17,11 @@
         <counts>
           <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="3" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -39,14 +39,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="2091" />
-          <entry key="py" value="7226" />
+          <entry key="py" value="7513" />
           <entry key="sh" value="49" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="49" />
-          <entry key="Python" value="9317" />
+          <entry key="Python" value="9604" />
         </counts>
       </usages-collector>
     </session>
@@ -56,18 +56,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ind_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4815">
-              <caret line="446" column="25" selection-start-line="446" selection-start-column="25" selection-end-line="446" selection-end-column="25" />
+            <state relative-caret-position="-2354">
+              <caret line="342" column="19" selection-start-line="342" selection-start-column="16" selection-end-line="342" selection-end-column="19" />
               <folding>
                 <element signature="e#47#57#0" expanded="true" />
-                <element signature="e#3052#3438#1" />
-                <element signature="e#4774#4819#0" />
-                <element signature="e#5986#6022#0" />
-                <element signature="e#7354#7826#0" />
-                <element signature="e#7867#9437#0" />
-                <element signature="e#9473#11114#0" />
-                <element signature="e#11156#12852#0" />
-                <element signature="e#14158#15141#0" />
+                <element signature="e#5890#5926#0" />
+                <element signature="e#7941#8113#0" />
               </folding>
             </state>
           </provider>
@@ -76,8 +70,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_ind.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="565">
+              <caret line="77" column="4" lean-forward="true" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="4" />
               <folding>
                 <element signature="e#48#88#0" expanded="true" />
               </folding>
@@ -88,12 +82,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
+            <state relative-caret-position="1554">
+              <caret line="79" column="34" selection-start-line="79" selection-end-line="79" selection-end-column="34" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <marker date="1547271895187" expanded="true" signature="1403:1891" ph="..." />
-                <marker date="1547271895187" expanded="true" signature="2331:2336" ph="..." />
+                <marker date="1547271895187" expanded="true" signature="2332:2336" ph="..." />
               </folding>
             </state>
           </provider>
@@ -110,8 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>allx[g[:, 0]]</find>
-      <find>batch_size</find>
       <find>toarray</find>
       <find>.toarray()</find>
       <find>model_l_x</find>
@@ -140,6 +132,8 @@
       <find>#sys</find>
       <find>sys</find>
       <find>nonlinearity_node1_x2_1</find>
+      <find>tx1</find>
+      <find>def makeTestFeature(tx, features):</find>
     </findStrings>
     <replaceStrings>
       <replace>sys</replace>
@@ -156,8 +150,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/train_planetoid.sh" />
-        <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/ind_model.py" />
+        <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/test_ind.py" />
       </list>
     </option>
@@ -173,6 +167,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -184,7 +179,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -282,12 +276,12 @@
     <frame x="0" y="23" width="1680" height="956" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.113553114" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.114774115" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.0" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -310,18 +304,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ind_model.py</url>
-          <line>345</line>
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ind_model.py</url>
-          <line>484</line>
+          <line>481</line>
           <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../../../cifar10_tutorial.py</url>
-          <line>170</line>
-          <option name="timeStamp" value="87" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -395,38 +379,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
+        <state relative-caret-position="1554">
+          <caret line="79" column="34" selection-start-line="79" selection-end-line="79" selection-end-column="34" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <marker date="1547271895187" expanded="true" signature="1403:1891" ph="..." />
-            <marker date="1547271895187" expanded="true" signature="2331:2336" ph="..." />
+            <marker date="1547271895187" expanded="true" signature="2332:2336" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ind_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4815">
-          <caret line="446" column="25" selection-start-line="446" selection-start-column="25" selection-end-line="446" selection-end-column="25" />
+        <state relative-caret-position="-2354">
+          <caret line="342" column="19" selection-start-line="342" selection-start-column="16" selection-end-line="342" selection-end-column="19" />
           <folding>
             <element signature="e#47#57#0" expanded="true" />
-            <element signature="e#3052#3438#1" />
-            <element signature="e#4774#4819#0" />
-            <element signature="e#5986#6022#0" />
-            <element signature="e#7354#7826#0" />
-            <element signature="e#7867#9437#0" />
-            <element signature="e#9473#11114#0" />
-            <element signature="e#11156#12852#0" />
-            <element signature="e#14158#15141#0" />
+            <element signature="e#5890#5926#0" />
+            <element signature="e#7941#8113#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_ind.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="565">
+          <caret line="77" column="4" lean-forward="true" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="4" />
           <folding>
             <element signature="e#48#88#0" expanded="true" />
           </folding>
