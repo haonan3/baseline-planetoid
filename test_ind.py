@@ -70,15 +70,16 @@ def main():
         trainpy = m.predict(trainx1,trainx2)
         test_accu = comp_accu(testpy, ty)                                                   # compute the accuracy on the dev set
         train_accu = comp_accu(trainpy,y)
-        print("Iteration: {}, curr train acc: {}, best train acc: {}".format(iter_cnt, train_accu, max_train_accu))
-        print("Iteration: {}, curr test acc: {}, best test acc: {}".format(iter_cnt, test_accu, max_test_accu))
+        print("Iteration: {} | curr train acc: {}, best train acc: {} | curr test acc: {}, best test acc: {}".
+              format(iter_cnt, train_accu, max_train_accu, test_accu, max_test_accu))
+
         iter_cnt += 1
         if test_accu >= max_test_accu:
             max_test_accu = test_accu
         if train_accu >= max_train_accu:
             max_train_accu = train_accu
 
-    #m.extract_embedding(embeddingpath=args.embedding_path)
+    #m.extract_embedding(embeddingpath=args.embedding_path)  # save embedding
     save_log(args.log_path, max_train_accu, max_test_accu)
     print("--- %s seconds ---" % (time.time() - start_time))
 
