@@ -413,7 +413,7 @@ class NeuralNetSupervised(nn.Module):
             if np.sum(torch.isnan(self.hiddenLayerWeight.t()).numpy()) > 0:
                 print("There are NaNs in hidden layer weight\n")
                 print(self.hiddenLayerWeight.t())
-                sys.exit()
+                #sys.exit()
 
             x1=torch.tensor(x1).float()
             l_x1_1 = self.fc_node1_x1(x1)
