@@ -29,8 +29,6 @@ class ind_model(base_model):
         init_iter_label (int): # iterations for optimizing label context loss.
         init_iter_graph (int): # iterations for optimizing graph context loss.
         """
-        # gx, gy, gz = next(self.label_generator)
-        # x, y = next(self.inst_generator)
         self.model_l_gx = NeuralNetUnsupervised(self.num_ver,  self.num_x, self.maxindex, self.embedding_size , self.neg_samp)
         self.model_l_x = NeuralNetSupervised(self.use_feature, self.embedding_size, self.num_ver, self.y_shape,
                                                                 self.layer_loss, self.model_l_gx.get_hiddenLayer())
@@ -111,11 +109,7 @@ class ind_model(base_model):
             ### gen_train_inst
             for _ in range(self.comp_iter(iter_inst)):
                 x1, x2, y = next(self.inst_generator)
-                # #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ")
-                # #print("Before--sup-net weight:\n")
-                # a = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(),axis=1)
-                # #print("Before--unsup-net weight:\n")
-                # b = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(),axis=1)
+
                 if self.layer_loss and self.use_feature:
                     hid_sym1, emd_sym1, hid_sym2, emd_sym2, py_sym = self.model_l_x(x1, x2)
 
@@ -132,22 +126,6 @@ class ind_model(base_model):
                 loss.backward()
                 optimizer_x.step()
 
-                # #print("After--sup-net weight:\n")
-                # c = np.nansum(self.model_l_x.hiddenLayerWeight.data.numpy(), axis=1)
-                #
-                # #print("After--unsup-net weight:\n")
-                # d = np.nansum(self.model_l_gx.get_hiddenLayer().data.numpy(), axis=1)
-                #
-                # if a.shape != c.shape or b.shape != d.shape or False in list(a == c) or False in list(b == d):
-                #     equal_before_update = False not in list(a == b)
-                #     equal_after_update = False not in list(c == d)
-                #     update1 = False in list(a == c)
-                #     update2 = False in list(b == d)
-                #     print("update as expected:{}".format(equal_before_update and equal_after_update and update1 and update2))
-                #     print(a.shape)
-                #     print(b.shape)
-                #     print(c.shape)
-                #     print(d.shape)
 
             ### gen_label_graph
             for _ in range(self.comp_iter(iter_label)):
@@ -405,34 +383,28 @@ class NeuralNetSupervised(nn.Module):
         
         #node1 direction1
         self.fc_node1_x1 = nn.Linear(self.num_ver, self.y_shape)
-        #self.fc_node1_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
         self.nonlinearity_node1_x1 = nn.Softmax()
 
         #node2 direction1
         self.fc_node2_x1 = nn.Linear(self.num_ver, self.y_shape)
-        #self.fc_node2_x1 = nn.Linear(self.num_ver, int(self.embedding_size/2))
         self.nonlinearity_node2_x1 = nn.Softmax()
 
         #node1 direction2
         self.nonlinearity_node1_x2_1 = nn.ReLU()
         self.fc_node1_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
-        #self.fc_node1_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
         self.nonlinearity_node1_x2_2 = nn.Softmax()
 
         #node2 direction2
         self.nonlinearity_node2_x2_1 = nn.ReLU()
         self.fc_node2_x2_2 = nn.Linear(self.embedding_size, self.y_shape)
-        #self.fc_node2_x2_2 = nn.Linear(self.embedding_size, int(self.embedding_size/2))
         self.nonlinearity_node2_x2_2 = nn.Softmax()
 
 
         if self.use_feature:
             self.fc_cat_four_feature = nn.Linear(self.y_shape * 4, self.y_shape)
-            #self.fc_cat_four_feature = nn.Linear(self.embedding_size * 2, self.y_shape)
             self.nonlinearity_cat_four_feature = nn.Softmax()
         else:
             self.fc_cat_two_feature = nn.Linear(self.y_shape * 2, self.y_shape)
-            #self.fc_cat_two_feature = nn.Linear(self.embedding_size * 1, self.y_shape)
             self.nonlinearity_cat_two_feature = nn.Softmax()
 
 
@@ -477,11 +449,6 @@ class NeuralNetSupervised(nn.Module):
 
     def embed(self, node_feature):
         node_feature = torch.tensor(node_feature).float()
-        #l_x1_1 = self.fc_node1_x1(node_feature)
-        #l_x1_1 = self.nonlinearity_node1_x1(l_x1_1)
         l_x1_2 = torch.mm(node_feature, self.hiddenLayerWeight.t())
-        #l_x1_2 = self.nonlinearity_node1_x2_1(l_x1_2)
-        #l_x1_2 = self.fc_node1_x2_2(l_x1_2)
-        #l_x1_2 = self.nonlinearity_node1_x2_2(l_x1_2)
-        #return torch.cat((l_x1_1, l_x1_2), dim=1).numpy()
+        l_x1_2 = self.nonlinearity_node1_x2_1(l_x1_2)
         return l_x1_2
