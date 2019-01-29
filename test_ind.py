@@ -56,7 +56,7 @@ def main():
     print("test rel path: "+args.rel_test_path)
 
     x, y = readRel(args.rel_train_path, args.label_ratio)
-    tx, ty = readRel(args.rel_test_path,1)
+    tx, ty = readRel(args.rel_test_path,10)
     print("make feature matrix according to graph node")
     allx = makeFeatureMatrix(features, graph)
     print(allx.shape)
