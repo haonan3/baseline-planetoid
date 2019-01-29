@@ -46,7 +46,7 @@ def write_feature(features, save_path, binary=False):
     print("Save processed features to: |" + save_path + "\n")
     index_list = range(features.shape[0])
     learned_embed = gensim.models.keyedvectors.Word2VecKeyedVectors(features.shape[1])
-    learned_embed.add(index_list, features)
+    learned_embed.add(list(index_list), features)
     learned_embed.save_word2vec_format(fname=save_path, binary=binary, total_vec=len(index_list))
 
 
