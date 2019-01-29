@@ -48,7 +48,7 @@ def makeFeatureDict(featurepath):
 
 def readRel(relpath, label_ratio):
     nlines = 0
-
+    label_ratio = int(label_ratio)/10
     with open(relpath, "r") as relfile:
         for l in relfile:
             nlines += 1

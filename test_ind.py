@@ -27,11 +27,11 @@ parser.add_argument('--layer_loss', help = 'whether incur loss on hidden layers'
 parser.add_argument('--graph_path', help = 'the path of graph file', type = str, default='../author_graph_dataset/author-1900-2020-link-all_copy.txt')
 parser.add_argument('--feature_path', help='the path of feature file', type = str, default='../author_graph_dataset/node-feature.csv')
 
-parser.add_argument('--label_ratio',help='the train label ratio', default=1.0, type=float)
+parser.add_argument('--label_ratio',help='the train label ratio', type=str, default='1')
+parser.add_argument('--folder_num', help='start from 1 to 5', type = str, default='1')
 parser.add_argument('--rel_train_path', help='the path of training relation file', type = str, default='../author_graph_dataset/5-folder-rel/rel-train')
 parser.add_argument('--rel_test_path', help='the path of testing relation file', type = str, default='../author_graph_dataset/5-folder-rel/rel-test')
 parser.add_argument('--log_path', help='the path of log file', type = str, default='../author_graph_dataset/planetoid_log_path.txt')
-parser.add_argument('--folder_num', help='start from 1 to 5', type = int, default=1)
 parser.add_argument('--max_epochs', help='max epochs', type = int, default=10000)
 #parser.add_argument('--embedding_path', help='the save path of embedding file', type = str, default='../author_graph_dataset/planetoid_embedding1-1.txt')
 
@@ -51,6 +51,7 @@ def main():
     #x, y, tx, ty, allx, graph = tuple(OBJECTS)
     graph, maxindex = makeGraphDict(args.graph_path)
     features = makeFeatureDict(args.feature_path)
+
     args.rel_train_path = args.rel_train_path+str(args.folder_num)+str('.txt')
     args.rel_test_path  = args.rel_test_path+str(args.folder_num)+str('.txt')
 
