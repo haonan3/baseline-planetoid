@@ -32,7 +32,7 @@ parser.add_argument('--rel_train_path', help='the path of training relation file
 parser.add_argument('--rel_test_path', help='the path of testing relation file', type = str, default='../author_graph_dataset/5-folder-rel/rel-test')
 parser.add_argument('--log_path', help='the path of log file', type = str, default='../author_graph_dataset/planetoid_log_path.txt')
 parser.add_argument('--folder_num', help='start from 1 to 5', type = int, default=1)
-
+parser.add_argument('--max_epochs', help='max epochs', type = int, default=10000)
 #parser.add_argument('--embedding_path', help='the save path of embedding file', type = str, default='../author_graph_dataset/planetoid_embedding1-1.txt')
 
 
@@ -70,7 +70,7 @@ def main():
     m.init_train(init_iter_label = 10000, init_iter_graph = 400)    # pre-training
     #m.init_train(init_iter_label=1, init_iter_graph=1)  # pre-training
     iter_cnt, max_test_accu, max_train_accu = 0, 0, 0
-    while iter_cnt < 15000:
+    while iter_cnt < args.max_epochs:
         m.step_train(max_iter = 10, iter_graph = 0.1, iter_inst = 1, iter_label = 0) # perform a training step
         testpy = m.predict(testx1, testx2)                                                         # predict the dev set
         trainpy = m.predict(trainx1,trainx2)
