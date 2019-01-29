@@ -46,7 +46,7 @@ def makeFeatureDict(featurepath):
     return features
 
 
-def readRel(relpath):
+def readRel(relpath, label_ratio):
     nlines = 0
 
     with open(relpath, "r") as relfile:
@@ -63,7 +63,9 @@ def readRel(relpath):
             label2y[0,label] = 1
             y.append(label2y)
 
-    return np.array(edge), np.array(y).reshape((-1,2))
+    start = 0
+    end = int(len(edge) * label_ratio)
+    return np.array(edge)[start:end,:], np.array(y).reshape((-1,2))
 
 
 def makeFeatureMatrix(features, graph):
