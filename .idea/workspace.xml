@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ab801e2-51ac-44bd-bd88-631188fb2fa4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graph_preprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph_preprocess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_ind.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_ind.py" afterDir="false" />
-    </list>
+    <list default="true" id="8ab801e2-51ac-44bd-bd88-631188fb2fa4" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +37,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="2160" />
-          <entry key="py" value="8133" />
+          <entry key="py" value="8189" />
           <entry key="sh" value="229" />
         </counts>
       </usages-collector>
@@ -49,7 +45,7 @@
         <counts>
           <entry key="Bash" value="172" />
           <entry key="PLAIN_TEXT" value="57" />
-          <entry key="Python" value="10293" />
+          <entry key="Python" value="10349" />
         </counts>
       </usages-collector>
     </session>
@@ -59,19 +55,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ind_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12">
-              <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graph_preprocess.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="649">
-              <caret line="74" column="17" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="17" />
+            <state relative-caret-position="559">
+              <caret line="433" lean-forward="true" selection-start-line="433" selection-end-line="433" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#47#57#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,11 +67,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_ind.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+            <state relative-caret-position="-126">
+              <caret line="38" column="13" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="13" />
               <folding>
                 <element signature="e#48#88#0" expanded="true" />
-                <marker date="1548786043978" expanded="true" signature="3172:3282" ph="..." />
+                <marker date="1548786160366" expanded="true" signature="3172:3282" ph="..." />
               </folding>
             </state>
           </provider>
@@ -93,8 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+            <state relative-caret-position="903">
+              <caret line="48" column="32" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -102,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/label_ratio.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+            <state relative-caret-position="189">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -140,7 +127,6 @@
       <find>nonlinearity_node1_x2_1</find>
       <find>tx1</find>
       <find>def makeTestFeature(tx, features):</find>
-      <find>print</find>
       <find>log_path</find>
       <find>save_log</find>
       <find>rel_train_path</find>
@@ -149,6 +135,7 @@
       <find>readRel</find>
       <find>label_ratio</find>
       <find>write_feature</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>sys</replace>
@@ -168,14 +155,15 @@
         <option value="$PROJECT_DIR$/ind_model.py" />
         <option value="$PROJECT_DIR$/result_stat.py" />
         <option value="$PROJECT_DIR$/label_ratio.sh" />
-        <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/graph_preprocess.py" />
         <option value="$PROJECT_DIR$/test_ind.py" />
+        <option value="$PROJECT_DIR$/utils.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="x" value="-821" />
+    <option name="y" value="-1057" />
     <option name="width" value="1680" />
     <option name="height" value="956" />
   </component>
@@ -215,7 +203,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.graph_preprocess">
+  <component name="RunManager" selected="Python.test_ind">
     <configuration name="cifar10_tutorial" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="planetoid_edge" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -286,8 +274,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.graph_preprocess" />
         <item itemvalue="Python.test_ind" />
+        <item itemvalue="Python.graph_preprocess" />
         <item itemvalue="Python.cifar10_tutorial" />
       </list>
     </recent_temporary>
@@ -315,7 +303,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="956" extended-state="0" />
+    <frame x="-821" y="-1057" width="1680" height="956" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15567766" />
@@ -329,7 +317,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298611" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3298611" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3298611" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -346,7 +334,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/test_ind.py</url>
-          <line>76</line>
+          <line>77</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -426,17 +414,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ind_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graph_preprocess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="74" column="17" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="17" />
+        <state relative-caret-position="1596">
+          <caret line="76" column="17" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="17" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -445,25 +426,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/label_ratio.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+        <state relative-caret-position="189">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ind_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="433" lean-forward="true" selection-start-line="433" selection-end-line="433" />
+          <folding>
+            <element signature="e#47#57#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+        <state relative-caret-position="903">
+          <caret line="48" column="32" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_ind.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+        <state relative-caret-position="-126">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="13" />
           <folding>
             <element signature="e#48#88#0" expanded="true" />
-            <marker date="1548786043978" expanded="true" signature="3172:3282" ph="..." />
+            <marker date="1548786160366" expanded="true" signature="3172:3282" ph="..." />
           </folding>
         </state>
       </provider>

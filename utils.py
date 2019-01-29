@@ -66,7 +66,7 @@ def readRel(relpath, label_ratio):
 
     start = 0
     end = int(len(edge) * label_ratio)
-    return np.array(edge)[start:end,:], np.array(y).reshape((-1,2))
+    return np.array(edge)[start:end,:], np.array(y).reshape((-1,2))[start:end,:]
 
 
 def makeFeatureMatrix(features, graph):
